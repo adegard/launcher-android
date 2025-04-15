@@ -261,13 +261,6 @@ fun openSettings(context: Context) {
     context.startActivity(intent)
 }
 
-fun openAppDrawer(context: Context) {
-    // This opens the app drawer/all apps screen
-    val intent = Intent(Intent.ACTION_MAIN)
-    intent.addCategory(Intent.CATEGORY_LAUNCHER)
-    context.startActivity(intent)
-}
-
 fun openMapApp(context: Context) {
     try {
         // Try to open Google Maps first
