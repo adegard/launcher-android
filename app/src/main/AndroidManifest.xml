@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <queries>
+        <intent>
+        <!-- Android 11+ restricts visibility into installed apps for privacy reasons — you can’t list or interact with apps unless you declare a reason.-->
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -19,11 +27,8 @@
             android:theme="@style/Theme.LauncherForYoungs">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.HOME" /> <!-- make as home launcher app-->
-
                 <category android:name="android.intent.category.DEFAULT" /> <!-- added when set as home... -->
-
                 <category android:name="android.intent.category.LAUNCHER" /> <!-- to display in app drawer -->
             </intent-filter>
         </activity>
