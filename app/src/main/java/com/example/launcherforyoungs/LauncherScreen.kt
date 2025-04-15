@@ -1,11 +1,13 @@
 // LauncherScreen.kt
 package com.example.launcherforyoungs
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.CalendarContract
 import android.provider.Settings
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -52,6 +54,7 @@ fun LauncherScreen(
     onScheduleClick: (Context) -> Unit,
     onDownArrowClick: () -> Unit,
     onMoreClick: (Context) -> Unit,
+    onMailClick: (Context) -> Unit,
     onSettingsClick: (Context) -> Unit
 ) {
     val context = LocalContext.current
@@ -81,11 +84,14 @@ fun LauncherScreen(
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Center
         ) {
-            MenuLink(text = "Chat", onClick = { onChatClick(context) })
-            Spacer(modifier = Modifier.height(24.dp))
             MenuLink(text = "Listen", onClick = { onListenClick(context) })
             Spacer(modifier = Modifier.height(24.dp))
             MenuLink(text = "Map", onClick = { onMapClick(context) })
+            Spacer(modifier = Modifier.height(24.dp))
+            MenuLink(text = "Chat", onClick = { onChatClick(context) })
+            Spacer(modifier = Modifier.height(24.dp))
+            MenuLink(text = "Mail", onClick = { onMailClick(context) })
+            //            TODO onMessageClick
             Spacer(modifier = Modifier.height(24.dp))
             MenuLink(text = "Photo", onClick = { onTakePhotoClick(context) })
             Spacer(modifier = Modifier.height(24.dp))
@@ -170,6 +176,58 @@ fun openMessagingApp(context: Context) {
     context.startActivity(intent)
 }
 
+fun openEmailApp(context: Context) {
+    val pm = context.packageManager
+
+    // Try to open Gmail
+    val gmailIntent = pm.getLaunchIntentForPackage("com.google.android.gm")
+    if (gmailIntent != null) {
+        context.startActivity(gmailIntent)
+        return
+    }
+
+    // Fallback: Open the default email app using intent category
+    val emailIntent = Intent(Intent.ACTION_MAIN).apply {
+        addCategory(Intent.CATEGORY_APP_EMAIL)
+    }
+
+    try {
+        context.startActivity(emailIntent)
+    } catch (e: ActivityNotFoundException) {
+        Toast.makeText(context, "No email app found", Toast.LENGTH_SHORT).show()
+    }
+}
+
+//fun openMusicApp(context: Context) {
+//    // Opens the music app
+//    val intent = Intent(Intent.ACTION_MAIN)
+//    intent.addCategory(Intent.CATEGORY_APP_MUSIC)
+//    context.startActivity(intent)
+//}
+
+fun openMusicApp(context: Context) {
+    val pm = context.packageManager
+
+    // Try to open Spotify
+    val spotifyIntent = pm.getLaunchIntentForPackage("com.spotify.music")
+    if (spotifyIntent != null) {
+        context.startActivity(spotifyIntent)
+        return
+    }
+
+    // Fallback: Open default music app
+    val musicIntent = Intent(Intent.ACTION_MAIN).apply {
+        addCategory(Intent.CATEGORY_APP_MUSIC)
+    }
+
+    try {
+        context.startActivity(musicIntent)
+    } catch (e: ActivityNotFoundException) {
+        Toast.makeText(context, "No music app found", Toast.LENGTH_SHORT).show()
+    }
+}
+
+
 fun openPhotosApp(context: Context) {
     // Open the default gallery/photos app
     val intent = Intent(Intent.ACTION_MAIN)
@@ -232,13 +290,6 @@ fun openMapApp(context: Context) {
     }
 }
 
-fun openMusicApp(context: Context) {
-    // Opens the music app
-    val intent = Intent(Intent.ACTION_MAIN)
-    intent.addCategory(Intent.CATEGORY_APP_MUSIC)
-    context.startActivity(intent)
-}
-
 @Preview(showBackground = true, name = "Launcher Screen Preview")
 @Composable
 fun LauncherScreenPreview() {
@@ -250,6 +301,7 @@ fun LauncherScreenPreview() {
             onTakePhotoClick = {},
             onScheduleClick = {},
             onMoreClick = {},
+            onMailClick = {},
             onSettingsClick = {},
             onDownArrowClick = {}
         )

@@ -91,7 +91,7 @@ fun AppListScreen(
                 Spacer(modifier = Modifier.width(16.dp))
                 
                 Text(
-                    text = "Applications",
+                    text = "All Apps",
                     style = TextStyle(
                         fontFamily = FontFamily.Serif,
                         fontSize = 24.sp,

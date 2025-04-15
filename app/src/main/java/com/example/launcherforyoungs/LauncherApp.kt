@@ -27,6 +27,7 @@ fun LauncherApp() {
                 onTakePhotoClick = { openPhotosApp(it) },
                 onScheduleClick = { openCalendarApp(it) },
                 onMoreClick = { currentScreen = Screen.APP_LIST },
+                onMailClick = { openEmailApp(it) },
                 onSettingsClick = { openSettings(it) },
                 onDownArrowClick = { /* Handle down arrow click if needed */ }
             )
