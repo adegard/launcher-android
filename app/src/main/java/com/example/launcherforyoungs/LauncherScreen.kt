@@ -143,6 +143,7 @@ private fun getCurrentTimeFormatted(): String {
     return sdf.format(Date())
 }
 
+
 @Composable
 fun MenuLink(text: String, onClick: () -> Unit, fontSize: Int = 28) {
     Text(
