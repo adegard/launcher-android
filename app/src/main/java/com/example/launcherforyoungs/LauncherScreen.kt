@@ -68,7 +68,7 @@ fun LauncherScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize(),
-            contentAlignment = Alignment.TopStart
+            contentAlignment = Alignment.TopEnd
         ) {
             // Current time display
             CurrentTimeDisplay(
@@ -198,12 +198,6 @@ fun openEmailApp(context: Context) {
     }
 }
 
-//fun openMusicApp(context: Context) {
-//    // Opens the music app
-//    val intent = Intent(Intent.ACTION_MAIN)
-//    intent.addCategory(Intent.CATEGORY_APP_MUSIC)
-//    context.startActivity(intent)
-//}
 
 fun openMusicApp(context: Context) {
     val pm = context.packageManager
