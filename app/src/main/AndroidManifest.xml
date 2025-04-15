@@ -20,7 +20,11 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.HOME" /> <!-- make as home launcher app-->
+
+                <category android:name="android.intent.category.DEFAULT" /> <!-- added when set as home... -->
+
+                <category android:name="android.intent.category.LAUNCHER" /> <!-- to display in app drawer -->
             </intent-filter>
         </activity>
     </application>
