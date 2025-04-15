@@ -9,7 +9,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.launcherapp.ui.theme.LauncherAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,4 +41,14 @@ fun DefaultPreview() {
     LauncherAppTheme {
         LauncherApp()
     }
+}
+
+
+@Composable
+fun LauncherAppTheme(content: @Composable () -> Unit) {
+        MaterialTheme(
+               colorScheme = MaterialTheme.colorScheme,
+                typography = MaterialTheme.typography,
+                content = content
+                   )
 }
